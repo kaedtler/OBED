@@ -1,5 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Taskbar;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +17,6 @@ namespace OBED
 {
     public partial class Form1 : Form
     {
-        TaskbarManager taskbar = TaskbarManager.Instance;
         const string key = "AvC7RStdqwmiVpozhXflF_cg9ScmQ4zLp1UhQg2tNTAJBPRsSYTXmu6C87Ae_QnP";
         const string reqUrl = @"http://dev.virtualearth.net/REST/V1/Imagery/Metadata/Birdseye/{0},{1}?o=xml&dir={2}&key={3}";
         const string prevUrl = @"http://www.bing.com/maps/default.aspx?cp={0}~{1}&dir={2}&sty=o&lvl=18";
@@ -32,7 +30,6 @@ namespace OBED
         {
             string fullUrl = string.Format(reqUrl, new string[] { latitudeNumericUpDown.Value.ToString(CultureInfo.CreateSpecificCulture("en-US")), longitudeNumericUpDown.Value.ToString(CultureInfo.CreateSpecificCulture("en-US")), northRadioButton.Checked ? "0" : eastRadioButton.Checked ? "90" : southRadioButton.Checked ? "180" : "270", key });
             Enabled = false;
-            taskbar.SetProgressState(TaskbarProgressBarState.Normal);
             backgroundWorker1.RunWorkerAsync(fullUrl);
         }
 
@@ -88,7 +85,6 @@ namespace OBED
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
-            taskbar.SetProgressValue(e.ProgressPercentage, 100);
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -116,7 +112,6 @@ namespace OBED
                 }
             }
             progressBar1.Value = 0;
-            taskbar.SetProgressValue(0, 100);
             Enabled = true;
         }
 
