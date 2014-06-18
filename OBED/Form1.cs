@@ -21,6 +21,7 @@ namespace OBED
         TaskbarManager taskbar = TaskbarManager.Instance;
         const string key = "AvC7RStdqwmiVpozhXflF_cg9ScmQ4zLp1UhQg2tNTAJBPRsSYTXmu6C87Ae_QnP";
         const string reqUrl = @"http://dev.virtualearth.net/REST/V1/Imagery/Metadata/Birdseye/{0},{1}?o=xml&dir={2}&key={3}";
+        const string prevUrl = @"http://www.bing.com/maps/default.aspx?cp={0}~{1}&dir={2}&sty=o&lvl=18";
 
         public Form1()
         {
@@ -117,6 +118,11 @@ namespace OBED
             progressBar1.Value = 0;
             taskbar.SetProgressValue(0, 100);
             Enabled = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(string.Format(prevUrl, latitudeNumericUpDown.Value.ToString(CultureInfo.CreateSpecificCulture("en-US")), longitudeNumericUpDown.Value.ToString(CultureInfo.CreateSpecificCulture("en-US")), northRadioButton.Checked ? "0" : eastRadioButton.Checked ? "90" : southRadioButton.Checked ? "180" : "270"));
         }
     }
 }

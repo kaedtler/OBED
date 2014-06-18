@@ -41,6 +41,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.latitudeNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.longitudeNumericUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -80,7 +81,7 @@
             -2147483648});
             this.latitudeNumericUpDown.Name = "latitudeNumericUpDown";
             this.latitudeNumericUpDown.Size = new System.Drawing.Size(140, 20);
-            this.latitudeNumericUpDown.TabIndex = 2;
+            this.latitudeNumericUpDown.TabIndex = 0;
             // 
             // longitudeNumericUpDown
             // 
@@ -98,7 +99,7 @@
             -2147483648});
             this.longitudeNumericUpDown.Name = "longitudeNumericUpDown";
             this.longitudeNumericUpDown.Size = new System.Drawing.Size(140, 20);
-            this.longitudeNumericUpDown.TabIndex = 3;
+            this.longitudeNumericUpDown.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -119,7 +120,7 @@
             this.westRadioButton.Location = new System.Drawing.Point(157, 19);
             this.westRadioButton.Name = "westRadioButton";
             this.westRadioButton.Size = new System.Drawing.Size(50, 17);
-            this.westRadioButton.TabIndex = 7;
+            this.westRadioButton.TabIndex = 5;
             this.westRadioButton.Text = "West";
             this.westRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -129,7 +130,7 @@
             this.southRadioButton.Location = new System.Drawing.Point(107, 19);
             this.southRadioButton.Name = "southRadioButton";
             this.southRadioButton.Size = new System.Drawing.Size(44, 17);
-            this.southRadioButton.TabIndex = 7;
+            this.southRadioButton.TabIndex = 4;
             this.southRadioButton.Text = "Süd";
             this.southRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -139,7 +140,7 @@
             this.eastRadioButton.Location = new System.Drawing.Point(60, 19);
             this.eastRadioButton.Name = "eastRadioButton";
             this.eastRadioButton.Size = new System.Drawing.Size(41, 17);
-            this.eastRadioButton.TabIndex = 6;
+            this.eastRadioButton.TabIndex = 3;
             this.eastRadioButton.Text = "Ost";
             this.eastRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -150,18 +151,18 @@
             this.northRadioButton.Location = new System.Drawing.Point(6, 19);
             this.northRadioButton.Name = "northRadioButton";
             this.northRadioButton.Size = new System.Drawing.Size(48, 17);
-            this.northRadioButton.TabIndex = 5;
+            this.northRadioButton.TabIndex = 2;
             this.northRadioButton.TabStop = true;
             this.northRadioButton.Text = "Nord";
             this.northRadioButton.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 124);
+            this.button1.Location = new System.Drawing.Point(93, 124);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(215, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Foto runterladen";
+            this.button1.Size = new System.Drawing.Size(134, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Foto herunterladen";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -179,11 +180,22 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(12, 124);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Vorschau";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(237, 184);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
@@ -219,6 +231,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
