@@ -38,10 +38,11 @@
             this.southRadioButton = new System.Windows.Forms.RadioButton();
             this.eastRadioButton = new System.Windows.Forms.RadioButton();
             this.northRadioButton = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
+            this.downloadButton = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button2 = new System.Windows.Forms.Button();
+            this.previewButton = new System.Windows.Forms.Button();
+            this.delBlackBorderCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.latitudeNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.longitudeNumericUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -156,19 +157,19 @@
             this.northRadioButton.Text = "Nord";
             this.northRadioButton.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // downloadButton
             // 
-            this.button1.Location = new System.Drawing.Point(93, 124);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Foto herunterladen";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.downloadButton.Location = new System.Drawing.Point(93, 146);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(134, 23);
+            this.downloadButton.TabIndex = 7;
+            this.downloadButton.Text = "Foto herunterladen";
+            this.downloadButton.UseVisualStyleBackColor = true;
+            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 153);
+            this.progressBar1.Location = new System.Drawing.Point(12, 175);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(215, 23);
             this.progressBar1.TabIndex = 6;
@@ -180,24 +181,37 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // button2
+            // previewButton
             // 
-            this.button2.Location = new System.Drawing.Point(12, 124);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Vorschau";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.previewButton.Location = new System.Drawing.Point(12, 146);
+            this.previewButton.Name = "previewButton";
+            this.previewButton.Size = new System.Drawing.Size(75, 23);
+            this.previewButton.TabIndex = 6;
+            this.previewButton.Text = "Vorschau";
+            this.previewButton.UseVisualStyleBackColor = true;
+            this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
+            // 
+            // delBlackBorderCheckBox
+            // 
+            this.delBlackBorderCheckBox.AutoSize = true;
+            this.delBlackBorderCheckBox.Checked = true;
+            this.delBlackBorderCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.delBlackBorderCheckBox.Location = new System.Drawing.Point(15, 123);
+            this.delBlackBorderCheckBox.Name = "delBlackBorderCheckBox";
+            this.delBlackBorderCheckBox.Size = new System.Drawing.Size(165, 17);
+            this.delBlackBorderCheckBox.TabIndex = 8;
+            this.delBlackBorderCheckBox.Text = "Entferne Schwarzen Rahmen";
+            this.delBlackBorderCheckBox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(237, 184);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(237, 210);
+            this.Controls.Add(this.delBlackBorderCheckBox);
+            this.Controls.Add(this.previewButton);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.downloadButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.longitudeNumericUpDown);
             this.Controls.Add(this.latitudeNumericUpDown);
@@ -228,10 +242,11 @@
         private System.Windows.Forms.RadioButton southRadioButton;
         private System.Windows.Forms.RadioButton eastRadioButton;
         private System.Windows.Forms.RadioButton northRadioButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button previewButton;
+        private System.Windows.Forms.CheckBox delBlackBorderCheckBox;
     }
 }
 

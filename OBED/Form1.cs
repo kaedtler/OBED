@@ -17,6 +17,10 @@ namespace OBED
 {
     public partial class Form1 : Form
     {
+        const int borderLeft = 120;
+        const int borderRight = 128;
+        const int borderTop = 168;
+        const int borderBottom = 168;
         const string key = "AvC7RStdqwmiVpozhXflF_cg9ScmQ4zLp1UhQg2tNTAJBPRsSYTXmu6C87Ae_QnP";
         const string reqUrl = @"http://dev.virtualearth.net/REST/V1/Imagery/Metadata/Birdseye/{0},{1}?o=xml&dir={2}&key={3}";
         const string prevUrl = @"http://www.bing.com/maps/default.aspx?cp={0}~{1}&dir={2}&sty=o&lvl=18";
@@ -26,11 +30,21 @@ namespace OBED
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void downloadButton_Click(object sender, EventArgs e)
         {
             string fullUrl = string.Format(reqUrl, new string[] { latitudeNumericUpDown.Value.ToString(CultureInfo.CreateSpecificCulture("en-US")), longitudeNumericUpDown.Value.ToString(CultureInfo.CreateSpecificCulture("en-US")), northRadioButton.Checked ? "0" : eastRadioButton.Checked ? "90" : southRadioButton.Checked ? "180" : "270", key });
-            Enabled = false;
+            DisableControls();
             backgroundWorker1.RunWorkerAsync(fullUrl);
+        }
+
+        void EnableControls()
+        {
+            latitudeNumericUpDown.Enabled = longitudeNumericUpDown.Enabled = northRadioButton.Enabled = eastRadioButton.Enabled = southRadioButton.Enabled = westRadioButton.Enabled = delBlackBorderCheckBox.Enabled = previewButton.Enabled = downloadButton.Enabled = true;
+        }
+
+        void DisableControls()
+        {
+            latitudeNumericUpDown.Enabled = longitudeNumericUpDown.Enabled = northRadioButton.Enabled = eastRadioButton.Enabled = southRadioButton.Enabled = westRadioButton.Enabled = delBlackBorderCheckBox.Enabled = previewButton.Enabled = downloadButton.Enabled = false;
         }
 
         private static Image GetImageFromURL(string url)
@@ -64,11 +78,11 @@ namespace OBED
                     int tilesX = int.Parse(imageNode.SelectSingleNode("ns:TilesX", ns).InnerText);
                     int tilesY = int.Parse(imageNode.SelectSingleNode("ns:TilesY", ns).InnerText);
                     int tilesCount = tilesX * tilesY;
-                    Bitmap bmp = new Bitmap(width * tilesX, height * tilesY);
+                    Bitmap bmp = new Bitmap(width * tilesX - (delBlackBorderCheckBox.Checked ? borderLeft + borderRight : 0), height * tilesY - (delBlackBorderCheckBox.Checked ? borderTop + borderBottom : 0));
                     using (Graphics gr = Graphics.FromImage(bmp))
                         for (int i = 0; i < tilesCount; i++)
                         {
-                            gr.DrawImage(GetImageFromURL(string.Format(url, subdomains[i % subdomains.Count], zoom, i)), (i % tilesX) * width, (i / tilesX) * height);
+                            gr.DrawImage(GetImageFromURL(string.Format(url, subdomains[i % subdomains.Count], zoom, i)), (i % tilesX) * width - (delBlackBorderCheckBox.Checked ? borderLeft : 0), (i / tilesX) * height - (delBlackBorderCheckBox.Checked ? borderTop : 0));
                             backgroundWorker1.ReportProgress(i * 100 / tilesCount);
                         }
                     e.Result = bmp;
@@ -100,7 +114,10 @@ namespace OBED
                     {
                         case ".jpg":
                         case ".jpeg":
-                            bmp.Save(save.FileName, ImageFormat.Jpeg);
+                            ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+                            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                            myEncoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 95L);
+                            bmp.Save(save.FileName, jgpEncoder, myEncoderParameters);
                             break;
                         case ".bmp":
                             bmp.Save(save.FileName, ImageFormat.Bmp);
@@ -112,12 +129,27 @@ namespace OBED
                 }
             }
             progressBar1.Value = 0;
-            Enabled = true;
+            EnableControls();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void previewButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(string.Format(prevUrl, latitudeNumericUpDown.Value.ToString(CultureInfo.CreateSpecificCulture("en-US")), longitudeNumericUpDown.Value.ToString(CultureInfo.CreateSpecificCulture("en-US")), northRadioButton.Checked ? "0" : eastRadioButton.Checked ? "90" : southRadioButton.Checked ? "180" : "270"));
+        }
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
         }
     }
 }
